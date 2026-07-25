@@ -125,36 +125,6 @@ const {
     ::-webkit-scrollbar-track { background: #FBF8F2; }
     ::-webkit-scrollbar-thumb { background: #DDD3BC; border-radius: 10px; }
   </style>
-
-  <!-- இந்த style block "is:global" — QuoteWall.astro (வேறு component) elements-க்கும் apply ஆக வேண்டும் என்பதால் -->
-  <style is:global>
-    /* Moving Quote Wall */
-    .pm-wall { position: relative; display: flex; flex-direction: column; gap: 28px; padding: 10px 0 6px; }
-    .pm-wall::before, .pm-wall::after { content: ""; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 3; pointer-events: none; }
-    .pm-wall::before { left: 0; background: linear-gradient(90deg, #FBF8F2, transparent); }
-    .pm-wall::after { right: 0; background: linear-gradient(270deg, #FBF8F2, transparent); }
-    .pm-row { display: flex; width: max-content; gap: 24px; will-change: transform; }
-    .pm-row.pm-left { animation: pmScrollLeft 55s linear infinite; }
-    .pm-row.pm-right { animation: pmScrollRight 60s linear infinite; }
-    .pm-row:hover { animation-play-state: paused; }
-    @keyframes pmScrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @keyframes pmScrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-    .pm-card {
-      position: relative; flex: 0 0 auto; width: 320px; padding: 30px 28px;
-      background: #FFFFFF; border: 1px solid #E3D8C6; border-radius: 14px;
-      box-shadow: 0 4px 16px -8px rgba(105, 36, 117, 0.10);
-      transform-style: preserve-3d; transition: border-color .4s ease, box-shadow .4s ease, transform .1s ease-out;
-    }
-    .pm-card::before { content: ""; position: absolute; top: 22px; left: 0; width: 3px; height: 28px; background: #82AB7D; border-radius: 0 3px 3px 0; }
-    .pm-card:hover { border-color: rgba(105, 36, 117, 0.35); box-shadow: 0 20px 40px -18px rgba(105, 36, 117, 0.28); }
-    .pm-mark { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 40px; color: #A47DAB; opacity: .9; line-height: .4; display: block; margin-bottom: 14px; }
-    .pm-quote-ta { font-family: 'Noto Serif Tamil', serif; font-weight: 500; font-size: 17px; line-height: 1.7; color: #2A2130; margin-bottom: 18px; }
-    .pm-attribution { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid #E3D8C6; }
-    .pm-avatar { width: 32px; height: 32px; border-radius: 50%; flex: 0 0 auto; background: linear-gradient(140deg, #A47DAB, #692475); background-size: cover; background-position: center; }
-    .pm-name { font-family: 'Manrope', sans-serif; font-size: 13px; color: #692475; font-weight: 600; }
-    .pm-role { font-family: 'Manrope', sans-serif; font-size: 11px; color: #6A6B4E; margin-top: 2px; letter-spacing: .02em; }
-    @media (prefers-reduced-motion: reduce) { .pm-row.pm-left, .pm-row.pm-right { animation: none !important; } }
-  </style>
 </head>
 <body class="font-body-md text-body-md">
   <header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
