@@ -124,7 +124,10 @@ const {
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #FBF8F2; }
     ::-webkit-scrollbar-thumb { background: #DDD3BC; border-radius: 10px; }
+  </style>
 
+  <!-- இந்த style block "is:global" — QuoteWall.astro (வேறு component) elements-க்கும் apply ஆக வேண்டும் என்பதால் -->
+  <style is:global>
     /* Moving Quote Wall */
     .pm-wall { position: relative; display: flex; flex-direction: column; gap: 28px; padding: 10px 0 6px; }
     .pm-wall::before, .pm-wall::after { content: ""; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 3; pointer-events: none; }
