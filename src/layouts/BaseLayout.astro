@@ -16,6 +16,19 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
   <script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Netlify Identity widget: இது இல்லாம invite/password-set links வேலை செய்யாது -->
+  <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script is:inline>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Noto+Serif+Tamil:wght@100..900&family=Catamaran:wght@100..900&family=Manrope:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <!--
     ==========================================================
