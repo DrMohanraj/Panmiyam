@@ -9,44 +9,20 @@ const featured = sorted.find((i) => i.data.featured) || sorted[0] || null;
 const others = sorted.filter((i) => i.slug !== featured?.slug).slice(0, 2);
 ---
 <BaseLayout>
-  <!-- Hero Section -->
-  <section class="relative min-h-[921px] flex flex-col md:flex-row items-center overflow-hidden pt-stack-lg">
+  <!-- Compact Identity Hero -->
+  <section class="relative overflow-hidden pt-section-gap pb-stack-lg">
     <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-bl from-primary-fixed/20 to-tertiary-fixed/10 -z-10 rounded-bl-[200px]"></div>
-    <div class="absolute -top-20 -left-20 w-64 h-64 botanical-accent">
-      <span class="material-symbols-outlined text-[200px] text-tertiary">eco</span>
+    <div class="absolute -top-16 -left-16 w-48 h-48 botanical-accent">
+      <span class="material-symbols-outlined text-[160px] text-tertiary">eco</span>
     </div>
-    <div class="container mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-      <div class="md:col-span-6 reveal active">
-        <span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-4">நேர்காணல்</span>
-        {featured ? (
-          <>
-            <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-6">{featured.data.title}</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8">{featured.data.excerpt}</p>
-            <div class="flex items-center gap-stack-md">
-              <a href={`/interview/${featured.slug}`} class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps flex items-center gap-2 group no-underline">
-                தொடர்ந்து படிக்க
-                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-              </a>
-              <span class="font-label-caps text-label-caps text-outline">{featured.data.authorName}</span>
-            </div>
-          </>
-        ) : (
-          <>
-            <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-6">உங்கள் முதல் நேர்காணல் இங்கு தெரியும்</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8">Placeholder — /admin மூலம் ஒரு நேர்காணலைச் சேர்த்தவுடன் இது தானாக இங்கு தெரியும்.</p>
-          </>
-        )}
-      </div>
-      <div class="md:col-span-6 relative reveal flex justify-center active">
-        <div class="relative z-10 w-full max-w-md aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden shadow-2xl magazine-lift">
-          <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-               src={featured?.data.coverImage || 'https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=800&h=1000&fit=crop&q=80'}
-               alt={featured?.data.authorName || 'Placeholder portrait'} />
-        </div>
-        <div class="absolute -bottom-10 -right-10 w-48 h-48 border border-primary/20 rounded-full flex items-center justify-center p-8 -z-10 animate-[spin_20s_linear_infinite]">
-          <span class="font-label-caps text-label-caps text-primary text-center">PANMIYAM LITERARY JOURNAL 2026</span>
-        </div>
-      </div>
+    <div class="container mx-auto px-margin-desktop text-center reveal active">
+      <span class="font-label-caps text-label-caps text-secondary tracking-[0.3em] block mb-4">TAMIL LITERARY &amp; CULTURAL JOURNAL</span>
+      <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-5">பன்மியம்</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mb-8">தமிழ்ச் சமூகத்தின் பன்மைத்துவத்தை கலை - இலக்கிய - சூழலியல் ஆளுமைகளின் நேர்காணல் மூலம் உணர ஓர் முன்னெடுப்பு</p>
+      <a href="/archive" class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps no-underline group">
+        நேர்காணல்களைப் படிக்க
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+      </a>
     </div>
   </section>
 
@@ -57,6 +33,39 @@ const others = sorted.filter((i) => i.slug !== featured?.slug).slice(0, 2);
   </div>
 
   <QuoteWall />
+
+  <!-- Featured Interview -->
+  {featured && (
+    <section class="py-section-gap relative overflow-hidden">
+      <div class="container mx-auto px-margin-desktop">
+        <p class="font-label-caps text-label-caps text-secondary tracking-widest text-center mb-10 reveal active">இந்த இதழின் சிறப்பு நேர்காணல்</p>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+          <div class="md:col-span-6 reveal active">
+            <h2 class="font-display-lg text-display-lg text-primary leading-tight mb-6">{featured.data.title}</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8">{featured.data.excerpt}</p>
+            <div class="flex items-center gap-stack-md">
+              <a href={`/interview/${featured.slug}`} class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps flex items-center gap-2 group no-underline">
+                தொடர்ந்து படிக்க
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="font-label-caps text-label-caps text-outline">{featured.data.authorName}</span>
+            </div>
+          </div>
+          <div class="md:col-span-6 relative reveal flex justify-center active">
+            <a href={`/interview/${featured.slug}`} class="relative z-10 w-full max-w-md aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden shadow-2xl magazine-lift block">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                   src={featured.data.coverImage}
+                   alt={featured.data.authorName} />
+            </a>
+            <div class="absolute -bottom-10 -right-10 w-48 h-48 border border-primary/20 rounded-full flex items-center justify-center p-8 -z-10 animate-[spin_20s_linear_infinite]">
+              <span class="font-label-caps text-label-caps text-primary text-center">PANMIYAM LITERARY JOURNAL 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
 
   <!-- Bento Grid -->
   <section class="py-section-gap px-margin-desktop">
