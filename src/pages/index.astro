@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteWall from '../components/QuoteWall.astro';
+
+const interviews = await getCollection('interviews');
+const sorted = interviews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featured = sorted.find((i) => i.data.featured) || sorted[0] || null;
+const others = sorted.filter((i) => i.slug !== featured?.slug).slice(0, 2);
+---
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="relative min-h-[921px] flex flex-col md:flex-row items-center overflow-hidden pt-stack-lg">
+    <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-bl from-primary-fixed/20 to-tertiary-fixed/10 -z-10 rounded-bl-[200px]"></div>
+    <div class="absolute -top-20 -left-20 w-64 h-64 botanical-accent">
+      <span class="material-symbols-outlined text-[200px] text-tertiary">eco</span>
+    </div>
+    <div class="container mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+      <div class="md:col-span-6 reveal active">
+        <span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-4">நேர்காணல்</span>
+        {featured ? (
+          <>
+            <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-6">{featured.data.title}</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8">{featured.data.excerpt}</p>
+            <div class="flex items-center gap-stack-md">
+              <a href={`/interview/${featured.slug}`} class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps flex items-center gap-2 group no-underline">
+                தொடர்ந்து படிக்க
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="font-label-caps text-label-caps text-outline">{featured.data.authorName}</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-6">உங்கள் முதல் நேர்காணல் இங்கு தெரியும்</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8">Placeholder — /admin மூலம் ஒரு நேர்காணலைச் சேர்த்தவுடன் இது தானாக இங்கு தெரியும்.</p>
+          </>
+        )}
+      </div>
+      <div class="md:col-span-6 relative reveal flex justify-center active">
+        <div class="relative z-10 w-full max-w-md aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden shadow-2xl magazine-lift">
+          <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+               src={featured?.data.coverImage || 'https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=800&h=1000&fit=crop&q=80'}
+               alt={featured?.data.authorName || 'Placeholder portrait'} />
+        </div>
+        <div class="absolute -bottom-10 -right-10 w-48 h-48 border border-primary/20 rounded-full flex items-center justify-center p-8 -z-10 animate-[spin_20s_linear_infinite]">
+          <span class="font-label-caps text-label-caps text-primary text-center">PANMIYAM LITERARY JOURNAL 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-center py-stack-lg reveal active">
+    <div class="h-[1px] w-1/4 bg-outline-variant"></div>
+    <span class="material-symbols-outlined text-secondary mx-8" style="font-variation-settings: 'FILL' 1;">spa</span>
+    <div class="h-[1px] w-1/4 bg-outline-variant"></div>
+  </div>
+
+  <QuoteWall />
+
+  <!-- Bento Grid -->
+  <section class="py-section-gap px-margin-desktop">
+    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-gutter h-auto md:h-[600px]">
+      <a href="/archive" class="md:col-span-2 md:row-span-2 bg-primary-container p-stack-lg rounded-xl flex flex-col justify-end text-on-primary-container relative overflow-hidden reveal group active no-underline cursor-pointer">
+        <div class="absolute inset-0 opacity-20 group-hover:scale-110 transition-transform duration-700">
+          <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=800&fit=crop&q=80" alt="" />
+        </div>
+        <div class="relative z-10">
+          <h3 class="font-headline-md text-headline-md mb-4">நேர்காணல்</h3>
+          <p class="font-body-md text-body-md mb-6 text-on-primary-fixed-variant">Conversations that define the current era of artistic expression.</p>
+          <span class="font-label-caps text-label-caps flex items-center gap-2">VIEW ALL <span class="material-symbols-outlined">north_east</span></span>
+        </div>
+      </a>
+      <a href="/media" class="md:col-span-2 bg-secondary-container p-stack-lg rounded-xl flex items-center justify-between reveal active no-underline cursor-pointer">
+        <div class="max-w-[60%]">
+          <h3 class="font-headline-md text-headline-md text-on-secondary-container mb-2">காணொளி</h3>
+          <p class="font-caption text-caption text-on-secondary-fixed-variant">Visual essays and auditory journeys.</p>
+        </div>
+        <span class="material-symbols-outlined text-6xl text-on-secondary-container/30">videocam</span>
+      </a>
+      <a href="/collections" class="md:col-span-2 bg-secondary-container p-stack-lg rounded-xl flex items-center justify-between reveal active no-underline cursor-pointer">
+        <div class="max-w-[60%]">
+          <h3 class="font-headline-md text-headline-md text-on-secondary-container mb-2">தொகுப்பு</h3>
+          <p class="font-caption text-caption text-on-secondary-fixed-variant">Curated anthologies on specific themes and movements.</p>
+        </div>
+        <span class="material-symbols-outlined text-6xl text-on-secondary-container/30">auto_stories</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Recent Interviews -->
+  {others.length > 0 && (
+    <section class="py-section-gap px-margin-desktop">
+      <h2 class="font-headline-md text-headline-md text-primary mb-10 text-center reveal active">சமீபத்திய நேர்காணல்கள்</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+        {others.map((entry) => (
+          <a href={`/interview/${entry.slug}`} class="block no-underline reveal active magazine-lift bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30">
+            <div class="aspect-[16/9] overflow-hidden">
+              <img src={entry.data.coverImage} alt={entry.data.authorName} class="w-full h-full object-cover" />
+            </div>
+            <div class="p-stack-md">
+              <span class="font-label-caps text-label-caps text-tertiary">{entry.data.category}</span>
+              <h3 class="font-headline-md text-headline-md text-primary mt-2 mb-2">{entry.data.title}</h3>
+              <p class="font-caption text-caption text-on-surface-variant">By {entry.data.authorName}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Newsletter -->
+  <section class="py-section-gap px-margin-desktop">
+    <div class="bg-surface-variant/50 rounded-3xl p-stack-lg md:p-section-gap text-center relative overflow-hidden reveal border border-white/40 active">
+      <div class="max-w-2xl mx-auto relative z-10">
+        <h2 class="font-display-lg text-display-lg text-primary mb-6">Join the <span class="font-serif italic">Dialogue</span></h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">Get monthly essays, exclusive interviews, and curated literary insights delivered to your inbox.</p>
+        <form name="newsletter" method="POST" data-netlify="true" class="flex flex-col md:flex-row gap-4">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <input class="flex-1 bg-surface border-b border-outline focus:border-primary focus:ring-0 px-4 py-4 font-body-md transition-all outline-none rounded-sm" placeholder="உங்களது மின்னஞ்சல்" type="email" name="email" required />
+          <button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-caps text-label-caps hover:bg-primary-container transition-all" type="submit">SUBSCRIBE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

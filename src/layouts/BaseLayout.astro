@@ -1,0 +1,215 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "பன்மியம் - இலக்கிய இதழ்",
+  description = "தமிழ்ச் சமூகத்தின் பன்மைத்துவத்தை கலை - இலக்கிய - சூழலியல் ஆளுமைகளின் நேர்காணல் மூலம் உணர ஓர் முன்னெடுப்பு",
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ta" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Noto+Serif+Tamil:wght@100..900&family=Catamaran:wght@100..900&family=Manrope:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <!--
+    ==========================================================
+    பன்மியம் (Panmiyam) - இலக்கிய இதழ் இணையதளம்
+    Placeholder content-ஐ Netlify CMS (/admin) மூலம் edit செய்யலாம்.
+    ==========================================================
+  -->
+  <script id="tailwind-config" is:inline>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#EFE7D9",
+            "on-tertiary-container": "#233420",
+            "surface-dim": "#ECE4D4",
+            "primary": "#692475",
+            "on-error": "#FFFFFF",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#FFFFFF",
+            "error": "#ba1a1a",
+            "background": "#FBF8F2",
+            "surface-variant": "#E8DDC9",
+            "primary-fixed-dim": "#D6B8DA",
+            "secondary-fixed-dim": "#D9C2DC",
+            "tertiary-container": "#82AB7D",
+            "on-tertiary": "#FFFFFF",
+            "inverse-primary": "#D6B8DA",
+            "inverse-surface": "#372A3E",
+            "on-primary-container": "#3A1642",
+            "on-surface": "#2A2130",
+            "tertiary-fixed-dim": "#A9C7A0",
+            "surface-tint": "#692475",
+            "secondary": "#A47DAB",
+            "surface-container-highest": "#E8DDC9",
+            "outline": "#6A6B4E",
+            "on-secondary-fixed": "#3A1642",
+            "on-tertiary-fixed": "#233420",
+            "on-secondary": "#FFFFFF",
+            "tertiary-fixed": "#DCE8D6",
+            "surface-container-low": "#F8F4EC",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#F0E1F1",
+            "on-surface-variant": "#6A6B4E",
+            "on-secondary-fixed-variant": "#75527D",
+            "primary-container": "#A47DAB",
+            "on-primary-fixed": "#3A1642",
+            "surface": "#FBF8F2",
+            "surface-bright": "#FDFBF7",
+            "outline-variant": "#DDD3BC",
+            "surface-container": "#F4EEE2",
+            "on-primary-fixed-variant": "#692475",
+            "secondary-container": "#F0E1F1",
+            "on-primary": "#FFFFFF",
+            "inverse-on-surface": "#FBF8F2",
+            "on-tertiary-fixed-variant": "#4F7049",
+            "on-secondary-container": "#692475",
+            "tertiary": "#4F7049",
+            "on-background": "#2A2130",
+            "secondary-fixed": "#F5EAF6"
+          },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "spacing": {
+            "margin-desktop": "80px", "stack-lg": "32px", "stack-sm": "8px",
+            "gutter": "32px", "section-gap": "120px", "margin-mobile": "24px", "stack-md": "16px"
+          },
+          "fontFamily": {
+            "body-lg": ["Catamaran"], "label-caps": ["Manrope"],
+            "display-lg-mobile": ["Bodoni Moda"], "headline-md": ["Noto Serif Tamil"],
+            "display-lg": ["Bodoni Moda"], "body-md": ["Catamaran"], "caption": ["Manrope"]
+          },
+          "fontSize": {
+            "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+            "display-lg-mobile": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+            "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+            "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+            "caption": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .botanical-accent { filter: opacity(0.15) grayscale(0.2); pointer-events: none; }
+    .magazine-lift { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; }
+    .magazine-lift:hover { transform: translateY(-8px) rotate(0.5deg); box-shadow: 0 20px 40px -10px rgba(105, 36, 117, 0.12); }
+    body { background-color: #FBF8F2; color: #2A2130; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #FBF8F2; }
+    ::-webkit-scrollbar-thumb { background: #DDD3BC; border-radius: 10px; }
+
+    /* Moving Quote Wall */
+    .pm-wall { position: relative; display: flex; flex-direction: column; gap: 28px; padding: 10px 0 6px; }
+    .pm-wall::before, .pm-wall::after { content: ""; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 3; pointer-events: none; }
+    .pm-wall::before { left: 0; background: linear-gradient(90deg, #FBF8F2, transparent); }
+    .pm-wall::after { right: 0; background: linear-gradient(270deg, #FBF8F2, transparent); }
+    .pm-row { display: flex; width: max-content; gap: 24px; will-change: transform; }
+    .pm-row.pm-left { animation: pmScrollLeft 55s linear infinite; }
+    .pm-row.pm-right { animation: pmScrollRight 60s linear infinite; }
+    .pm-row:hover { animation-play-state: paused; }
+    @keyframes pmScrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes pmScrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .pm-card {
+      position: relative; flex: 0 0 auto; width: 320px; padding: 30px 28px;
+      background: #FFFFFF; border: 1px solid #E3D8C6; border-radius: 14px;
+      box-shadow: 0 4px 16px -8px rgba(105, 36, 117, 0.10);
+      transform-style: preserve-3d; transition: border-color .4s ease, box-shadow .4s ease, transform .1s ease-out;
+    }
+    .pm-card::before { content: ""; position: absolute; top: 22px; left: 0; width: 3px; height: 28px; background: #82AB7D; border-radius: 0 3px 3px 0; }
+    .pm-card:hover { border-color: rgba(105, 36, 117, 0.35); box-shadow: 0 20px 40px -18px rgba(105, 36, 117, 0.28); }
+    .pm-mark { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 40px; color: #A47DAB; opacity: .9; line-height: .4; display: block; margin-bottom: 14px; }
+    .pm-quote-ta { font-family: 'Noto Serif Tamil', serif; font-weight: 500; font-size: 17px; line-height: 1.7; color: #2A2130; margin-bottom: 18px; }
+    .pm-attribution { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid #E3D8C6; }
+    .pm-avatar { width: 32px; height: 32px; border-radius: 50%; flex: 0 0 auto; background: linear-gradient(140deg, #A47DAB, #692475); background-size: cover; background-position: center; }
+    .pm-name { font-family: 'Manrope', sans-serif; font-size: 13px; color: #692475; font-weight: 600; }
+    .pm-role { font-family: 'Manrope', sans-serif; font-size: 11px; color: #6A6B4E; margin-top: 2px; letter-spacing: .02em; }
+    @media (prefers-reduced-motion: reduce) { .pm-row.pm-left, .pm-row.pm-right { animation: none !important; } }
+  </style>
+</head>
+<body class="font-body-md text-body-md">
+  <header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
+    <nav class="flex justify-between items-center px-margin-desktop py-stack-md max-w-full mx-auto">
+      <a href="/" class="font-headline-md text-headline-md text-primary tracking-tight no-underline">பன்மியம்</a>
+      <div class="hidden md:flex items-center gap-stack-lg">
+        <a class="font-label-caps text-label-caps text-on-surface-variant pb-1 hover:text-primary transition-colors duration-300" href="/archive">நேர்காணல்கள்</a>
+        <a class="font-label-caps text-label-caps text-on-surface-variant pb-1 hover:text-primary transition-colors duration-300" href="/issues">இதழ்கள்</a>
+        <a class="font-label-caps text-label-caps text-on-surface-variant pb-1 hover:text-primary transition-colors duration-300" href="/collections">தொகுப்பு</a>
+        <a class="font-label-caps text-label-caps text-on-surface-variant pb-1 hover:text-primary transition-colors duration-300" href="/about">எங்களைப் பற்றி</a>
+      </div>
+      <div class="flex items-center gap-stack-md">
+        <span class="material-symbols-outlined text-primary cursor-pointer">search</span>
+        <a href="/newsletter" class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps text-label-caps hover:bg-primary-container transition-all active:scale-95 inline-block no-underline">Subscribe</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="bg-surface border-t border-outline-variant/50 pt-stack-lg mt-section-gap">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-desktop py-section-gap max-w-full mx-auto">
+      <div>
+        <div class="font-headline-md text-headline-md text-primary mb-6">பன்மியம்</div>
+        <p class="font-caption text-caption text-on-surface-variant/80 max-w-xs">தமிழ்ச் சமூகத்தின் பன்மைத்துவத்தை கலை - இலக்கிய - சூழலியல் ஆளுமைகளின் நேர்காணல் மூலம் உணர ஓர் முன்னெடுப்பு</p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-2">
+          <a class="font-caption text-caption text-on-surface-variant/80 hover:text-primary transition-all" href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a class="font-caption text-caption text-on-surface-variant/80 hover:text-primary transition-all" href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+          <a class="font-caption text-caption text-on-surface-variant/80 hover:text-primary transition-all" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <a class="font-caption text-caption text-on-surface-variant/80 hover:text-primary transition-all" href="/newsletter">Newsletter</a>
+          <a class="font-caption text-caption text-on-surface-variant/80 hover:text-primary transition-all" href="/about">Privacy Policy</a>
+          <a class="font-caption text-caption text-on-surface-variant/80 hover:text-primary transition-all" href="/contact">Contact</a>
+        </div>
+      </div>
+      <div class="flex flex-col items-end justify-between">
+        <div class="flex gap-4">
+          <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">language</span>
+          <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">bookmark</span>
+        </div>
+        <p class="font-caption text-caption text-on-surface-variant/80 mt-4 md:mt-0 text-right">© 2026 பன்மியம் இணைய இதழ்</p>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, observerOptions);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 3D tilt for any .pm-card / .magazine-lift on the page
+    document.querySelectorAll('.pm-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = ((y / rect.height) - 0.5) * -8;
+        const ry = ((x / rect.width) - 0.5) * 8;
+        card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(700px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>

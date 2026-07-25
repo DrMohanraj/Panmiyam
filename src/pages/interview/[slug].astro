@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const interviews = await getCollection('interviews');
+  return interviews.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { title, authorName, authorRole, authorPhoto, coverImage, interviewerName, category, date, qa } = entry.data;
+---
+<BaseLayout title={`${title} - பன்மியம்`}>
+  <article class="px-margin-desktop pt-section-gap">
+    <div class="max-w-3xl mx-auto text-center reveal active">
+      <span class="font-label-caps text-label-caps text-secondary">{category} • {date.toLocaleDateString('ta-IN', { year: 'numeric', month: 'long' })}</span>
+      <h1 class="font-display-lg text-display-lg text-primary my-6">{title}</h1>
+      {interviewerName && <p class="font-caption text-caption text-on-surface-variant">நேர்காணல் கண்டவர்: {interviewerName}</p>}
+    </div>
+
+    <div class="max-w-4xl mx-auto my-stack-lg rounded-xl overflow-hidden shadow-xl reveal active">
+      <img src={coverImage} alt={authorName} class="w-full aspect-[16/9] object-cover" />
+    </div>
+
+    <div class="max-w-2xl mx-auto flex items-center gap-4 mb-section-gap reveal active">
+      <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary/20 flex-shrink-0">
+        <img src={authorPhoto} alt={authorName} class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <h2 class="font-headline-md text-headline-md text-primary">{authorName}</h2>
+        {authorRole && <p class="font-label-caps text-label-caps text-secondary">{authorRole}</p>}
+      </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto space-y-stack-lg pb-section-gap">
+      {qa.map((item, i) => (
+        <div class="reveal active">
+          <p class="font-headline-md text-headline-md text-primary mb-3">{item.question}</p>
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed">{item.answer}</p>
+          {i < qa.length - 1 && <div class="h-[1px] bg-outline-variant/50 mt-stack-lg"></div>}
+        </div>
+      ))}
+    </div>
+
+    <div class="max-w-2xl mx-auto pb-section-gap text-center reveal active">
+      <a href="/archive" class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1 no-underline">← காப்பகத்திற்குத் திரும்பு</a>
+    </div>
+  </article>
+</BaseLayout>

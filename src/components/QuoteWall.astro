@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+
+const interviews = await getCollection('interviews');
+
+// ஒவ்வொரு interview-இன் pullQuotes-ஐயும் தட்டையாக்கி single list ஆக்குதல்
+const allQuotes = interviews.flatMap((entry) =>
+  entry.data.pullQuotes.map((q) => ({
+    quote: q,
+    name: entry.data.authorName,
+    role: entry.data.authorRole || '',
+    photo: entry.data.authorPhoto,
+  }))
+);
+
+// எதுவும் இல்லைனா, placeholder quotes காட்டு (content இன்னும் இல்லாத போது demo-க்கு)
+const fallback = [
+  { quote: "எழுத்து என்பது அமைதியின் இன்னொரு குரல்.", name: "எழுத்தாளர் பெயர் (placeholder)", role: "கவிஞர்", photo: "" },
+  { quote: "மொழி வாழும்போது மட்டுமே நினைவுகள் வாழ்கின்றன.", name: "எழுத்தாளர் பெயர் (placeholder)", role: "நாவலாசிரியர்", photo: "" },
+  { quote: "ஒவ்வொரு கதையும் ஒரு கண்ணாடி — நம்மைத் திருப்பிக் காட்டுகிறது.", name: "எழுத்தாளர் பெயர் (placeholder)", role: "சிறுகதை எழுத்தாளர்", photo: "" },
+  { quote: "வாசிப்பு என்பது தனிமையில் கண்டடையும் தோழமை.", name: "எழுத்தாளர் பெயர் (placeholder)", role: "கட்டுரையாளர்", photo: "" },
+];
+
+const quotes = allQuotes.length > 0 ? allQuotes : fallback;
+const row1 = [...quotes, ...quotes];
+const row2 = [...quotes].reverse().concat([...quotes].reverse());
+---
+<section class="py-section-gap relative overflow-hidden">
+  <div class="absolute top-1/2 left-0 w-full h-1/2 bg-surface-dim/30 -z-10"></div>
+  <div class="container mx-auto px-margin-desktop text-center mb-14 reveal active">
+    <p class="font-label-caps text-label-caps text-tertiary mb-3">எழுத்தாளர்களின் குரல்</p>
+    <h2 class="font-headline-md text-headline-md text-primary">நகரும் <span class="italic text-secondary">மேற்கோள்</span> சுவர்</h2>
+    {allQuotes.length === 0 && (
+      <p class="font-caption text-caption text-on-surface-variant mt-3">Placeholder content — நேர்காணல்கள் CMS மூலம் சேர்க்கும்போது இங்கு தானாகப் புதுப்பிக்கப்படும்</p>
+    )}
+  </div>
+  <div class="pm-wall reveal active">
+    <div class="pm-row pm-left">
+      {row1.map((item) => (
+        <div class="pm-card">
+          <span class="pm-mark">"</span>
+          <p class="pm-quote-ta">{item.quote}</p>
+          <div class="pm-attribution">
+            <div class="pm-avatar" style={item.photo ? `background-image:url('${item.photo}')` : ''}></div>
+            <div>
+              <div class="pm-name">{item.name}</div>
+              <div class="pm-role">{item.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="pm-row pm-right">
+      {row2.map((item) => (
+        <div class="pm-card">
+          <span class="pm-mark">"</span>
+          <p class="pm-quote-ta">{item.quote}</p>
+          <div class="pm-attribution">
+            <div class="pm-avatar" style={item.photo ? `background-image:url('${item.photo}')` : ''}></div>
+            <div>
+              <div class="pm-name">{item.name}</div>
+              <div class="pm-role">{item.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="absolute bottom-10 right-10 w-32 h-32 botanical-accent animate-pulse">
+    <span class="material-symbols-outlined text-[100px] text-tertiary">filter_vintage</span>
+  </div>
+</section>
