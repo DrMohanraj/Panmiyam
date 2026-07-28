@@ -11,6 +11,7 @@ const interviews = defineCollection({
     coverImage: z.string(),                // நேர்காணல் cover/hero image
     interviewerName: z.string().optional(),// நேர்காணல் கண்டவர் பெயர்
     category: z.string(),                  // இலக்கியம் / கலை / சினிமா / இசை etc.
+    tags: z.array(z.string()).default([]),  // subject tags (எ.கா. அரசியல், கவிதையியல், வரலாறு) — footer tag cloud & archive filter-க்கு
     issueNumber: z.string().optional(),    // இதழ் எண்
     date: z.date(),                        // வெளியான தேதி
     excerpt: z.string(),                   // சுருக்க அறிமுகம் (archive card-ல் தெரியும்)

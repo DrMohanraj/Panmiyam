@@ -6,6 +6,9 @@ authorPhoto: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200
 coverImage: "https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=1200&h=675&fit=crop&q=80"
 interviewerName: "நேர்காணல் கண்டவர் பெயர் (placeholder)"
 category: "இலக்கியம்"
+tags:
+  - "கவிதையியல்"
+  - "இலக்கியம்"
 issueNumber: "12"
 date: 2026-03-01
 excerpt: "நவீன தமிழ் இலக்கியத்தின் அமைதியான ஆற்றல் பற்றி, சமகால கவிதையின் கட்டமைப்பு அழகையும் வரலாற்றின் பாரத்தையும் ஆராயும் நேர்காணல்."

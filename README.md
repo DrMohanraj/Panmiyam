@@ -1,4 +1,6 @@
-# பன்மியம் (Panmiyam) — Astro + Netlify CMS Setup
+# கூவல் (Koovel) — Astro + Netlify CMS Setup
+
+**குறிப்பு:** இந்த இதழின் பெயர் "பன்மியம்"-ல் இருந்து "கூவல்"-ஆக மாற்றப்பட்டுள்ளது. கீழே உள்ள வழிமுறைகளில் `panmiyam` எனும் folder/repo பெயர் **technical reference மட்டும்** — code-ல் காட்டப்படும் பெயர் "கூவல்" தான். உங்க GitHub repo பெயரையும் மாற்ற விரும்பினால், அது ஒரு தனி (optional) படி — repo settings-ல் rename செய்யலாம்.
 
 இது உங்க இலக்கிய இதழ் website-இன் முழுமையான project. இதுல் Netlify CMS (`/admin`) மூலம்
 நேர்காணல்களை Code தொடாமல் form-ல் நிரப்பி publish பண்ணலாம்.

@@ -6,6 +6,9 @@ authorPhoto: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=
 coverImage: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1200&h=675&fit=crop&q=80"
 interviewerName: "நேர்காணல் கண்டவர் பெயர் (placeholder)"
 category: "விமர்சனம்"
+tags:
+  - "வாசிப்பு"
+  - "விமர்சனம்"
 issueNumber: "10"
 date: 2026-01-01
 excerpt: "வாசிப்பு பழக்கம் எவ்வாறு தனிமனித அடையாளத்தை வடிவமைக்கிறது என்பது குறித்த சிந்தனையைத் தூண்டும் நேர்காணல்."

@@ -1,12 +1,18 @@
 ---
+import { getCollection } from 'astro:content';
+
 export interface Props {
   title?: string;
   description?: string;
 }
 const {
-  title = "பன்மியம் - இலக்கிய இதழ்",
+  title = "கூவல் - இலக்கிய இதழ்",
   description = "தமிழ்ச் சமூகத்தின் பன்மைத்துவத்தை கலை - இலக்கிய - சூழலியல் ஆளுமைகளின் நேர்காணல் மூலம் உணர ஓர் முன்னெடுப்பு",
 } = Astro.props;
+
+// Footer tag cloud-க்காக எல்லா interviews-இன் tags-ஐயும் தனிப்பட்ட (unique) பட்டியலா சேகரித்தல்
+const allInterviews = await getCollection('interviews');
+const allTags = [...new Set(allInterviews.flatMap((entry) => entry.data.tags || []))];
 ---
 <!DOCTYPE html>
 <html lang="ta" class="light">
@@ -32,7 +38,7 @@ const {
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Noto+Serif+Tamil:wght@100..900&family=Catamaran:wght@100..900&family=Manrope:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <!--
     ==========================================================
-    பன்மியம் (Panmiyam) - இலக்கிய இதழ் இணையதளம்
+    கூவல் (Koovel) - இலக்கிய இதழ் இணையதளம்
     Placeholder content-ஐ Netlify CMS (/admin) மூலம் edit செய்யலாம்.
     ==========================================================
   -->
@@ -45,50 +51,50 @@ const {
             "surface-container-high": "#EFE7D9",
             "on-tertiary-container": "#233420",
             "surface-dim": "#ECE4D4",
-            "primary": "#692475",
+            "primary": "#1B4D91",
             "on-error": "#FFFFFF",
             "on-error-container": "#93000a",
             "surface-container-lowest": "#FFFFFF",
             "error": "#ba1a1a",
             "background": "#FBF8F2",
             "surface-variant": "#E8DDC9",
-            "primary-fixed-dim": "#D6B8DA",
-            "secondary-fixed-dim": "#D9C2DC",
+            "primary-fixed-dim": "#A8C5E8",
+            "secondary-fixed-dim": "#B7D2ED",
             "tertiary-container": "#82AB7D",
             "on-tertiary": "#FFFFFF",
-            "inverse-primary": "#D6B8DA",
-            "inverse-surface": "#372A3E",
-            "on-primary-container": "#3A1642",
-            "on-surface": "#2A2130",
+            "inverse-primary": "#A8C5E8",
+            "inverse-surface": "#1C2E42",
+            "on-primary-container": "#0F2A4A",
+            "on-surface": "#1A2938",
             "tertiary-fixed-dim": "#A9C7A0",
-            "surface-tint": "#692475",
-            "secondary": "#A47DAB",
+            "surface-tint": "#1B4D91",
+            "secondary": "#4F7FBF",
             "surface-container-highest": "#E8DDC9",
             "outline": "#6A6B4E",
-            "on-secondary-fixed": "#3A1642",
+            "on-secondary-fixed": "#0F2A4A",
             "on-tertiary-fixed": "#233420",
             "on-secondary": "#FFFFFF",
             "tertiary-fixed": "#DCE8D6",
             "surface-container-low": "#F8F4EC",
             "error-container": "#ffdad6",
-            "primary-fixed": "#F0E1F1",
+            "primary-fixed": "#E4EDF9",
             "on-surface-variant": "#6A6B4E",
-            "on-secondary-fixed-variant": "#75527D",
-            "primary-container": "#A47DAB",
-            "on-primary-fixed": "#3A1642",
+            "on-secondary-fixed-variant": "#2F5C8F",
+            "primary-container": "#4F7FBF",
+            "on-primary-fixed": "#0F2A4A",
             "surface": "#FBF8F2",
             "surface-bright": "#FDFBF7",
             "outline-variant": "#DDD3BC",
             "surface-container": "#F4EEE2",
-            "on-primary-fixed-variant": "#692475",
-            "secondary-container": "#F0E1F1",
+            "on-primary-fixed-variant": "#1B4D91",
+            "secondary-container": "#E4EDF9",
             "on-primary": "#FFFFFF",
             "inverse-on-surface": "#FBF8F2",
             "on-tertiary-fixed-variant": "#4F7049",
-            "on-secondary-container": "#692475",
+            "on-secondary-container": "#1B4D91",
             "tertiary": "#4F7049",
-            "on-background": "#2A2130",
-            "secondary-fixed": "#F5EAF6"
+            "on-background": "#1A2938",
+            "secondary-fixed": "#EDF3FB"
           },
           "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
           "spacing": {
@@ -119,8 +125,8 @@ const {
     .reveal.active { opacity: 1; transform: translateY(0); }
     .botanical-accent { filter: opacity(0.15) grayscale(0.2); pointer-events: none; }
     .magazine-lift { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; }
-    .magazine-lift:hover { transform: translateY(-8px) rotate(0.5deg); box-shadow: 0 20px 40px -10px rgba(105, 36, 117, 0.12); }
-    body { background-color: #FBF8F2; color: #2A2130; overflow-x: hidden; }
+    .magazine-lift:hover { transform: translateY(-8px) rotate(0.5deg); box-shadow: 0 20px 40px -10px rgba(27, 77, 145, 0.12); }
+    body { background-color: #FBF8F2; color: #1A2938; overflow-x: hidden; }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #FBF8F2; }
     ::-webkit-scrollbar-thumb { background: #DDD3BC; border-radius: 10px; }
@@ -129,7 +135,7 @@ const {
 <body class="font-body-md text-body-md">
   <header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
     <nav class="flex justify-between items-center px-margin-desktop py-stack-md max-w-full mx-auto">
-      <a href="/" class="font-headline-md text-headline-md text-primary tracking-tight no-underline">பன்மியம்</a>
+      <a href="/" class="font-headline-md text-headline-md text-primary tracking-tight no-underline">கூவல்</a>
       <div class="hidden md:flex items-center gap-stack-lg">
         <a class="font-label-caps text-label-caps text-on-surface-variant pb-1 hover:text-primary transition-colors duration-300" href="/archive">நேர்காணல்கள்</a>
         <a class="font-label-caps text-label-caps text-on-surface-variant pb-1 hover:text-primary transition-colors duration-300" href="/issues">இதழ்கள்</a>
@@ -148,9 +154,22 @@ const {
   </main>
 
   <footer class="bg-surface border-t border-outline-variant/50 pt-stack-lg mt-section-gap">
+    <div class="px-margin-desktop pt-stack-lg">
+      <div class="bg-surface-variant/50 rounded-2xl p-stack-md md:p-stack-lg flex flex-col md:flex-row items-center justify-between gap-stack-md border border-white/40 reveal active">
+        <div class="text-center md:text-left">
+          <h2 class="font-headline-md text-headline-md text-primary">Join the <span class="italic">Dialogue</span></h2>
+          <p class="font-caption text-caption text-on-surface-variant mt-1">மாதாந்திர கட்டுரைகள், தனிச்சிறப்பு நேர்காணல்கள் உங்கள் இன்பாக்ஸில்.</p>
+        </div>
+        <form name="newsletter" method="POST" data-netlify="true" class="flex w-full md:w-auto gap-3">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <input class="flex-1 md:w-64 bg-surface border-b border-outline focus:border-primary focus:ring-0 px-4 py-3 font-body-md text-sm transition-all outline-none rounded-sm" placeholder="உங்களது மின்னஞ்சல்" type="email" name="email" required />
+          <button class="bg-primary text-on-primary px-6 py-3 rounded-full font-label-caps text-label-caps hover:bg-primary-container transition-all whitespace-nowrap" type="submit">SUBSCRIBE</button>
+        </form>
+      </div>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-desktop py-section-gap max-w-full mx-auto">
       <div>
-        <div class="font-headline-md text-headline-md text-primary mb-6">பன்மியம்</div>
+        <div class="font-headline-md text-headline-md text-primary mb-6">கூவல்</div>
         <p class="font-caption text-caption text-on-surface-variant/80 max-w-xs">தமிழ்ச் சமூகத்தின் பன்மைத்துவத்தை கலை - இலக்கிய - சூழலியல் ஆளுமைகளின் நேர்காணல் மூலம் உணர ஓர் முன்னெடுப்பு</p>
       </div>
       <div class="grid grid-cols-2 gap-4">
@@ -170,9 +189,18 @@ const {
           <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">language</span>
           <span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">bookmark</span>
         </div>
-        <p class="font-caption text-caption text-on-surface-variant/80 mt-4 md:mt-0 text-right">© 2026 பன்மியம் இணைய இதழ்</p>
+        <p class="font-caption text-caption text-on-surface-variant/80 mt-4 md:mt-0 text-right">© 2026 கூவல் இணைய இதழ்</p>
       </div>
     </div>
+    {allTags.length > 0 && (
+      <div class="px-margin-desktop pb-stack-lg border-t border-outline-variant/30 pt-stack-md">
+        <div class="flex flex-wrap gap-2">
+          {allTags.map((tag) => (
+            <a href={`/archive?tag=${encodeURIComponent(tag)}`} class="font-caption text-[11px] bg-surface-container text-on-surface-variant px-3 py-1 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-colors no-underline">{tag}</a>
+          ))}
+        </div>
+      </div>
+    )}
   </footer>
 
   <script is:inline>
