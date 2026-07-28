@@ -2,17 +2,19 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// authorName-ஐ URL-safe slug ஆக மாற்றுதல்
-function slugify(name: string) {
-  return name.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\u0B80-\u0BFF-]/g, '');
-}
-
 export async function getStaticPaths() {
   const interviews = await getCollection('interviews');
   const authorMap = new Map<string, typeof interviews>();
 
   interviews.forEach((entry) => {
-    const key = slugify(entry.data.authorName);
+    // authorName-ஐ URL-safe slug ஆக மாற்றுதல் (இங்கேயே inline-ஆக, தனி function இல்லாமல் —
+    // Astro-இன் getStaticPaths build-time extraction, வெளியில் இருக்கும் helper function-ஐ
+    // சில நேரம் சரியா bundle பண்ணாத ஒரு known issue இருப்பதால்)
+    const key = entry.data.authorName
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\u0B80-\u0BFF-]/g, '');
     if (!authorMap.has(key)) authorMap.set(key, []);
     authorMap.get(key)!.push(entry);
   });
