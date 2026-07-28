@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteWall from '../components/QuoteWall.astro';
+
+const interviews = await getCollection('interviews');
+const sorted = interviews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featured = sorted.find((i) => i.data.featured) || sorted[0] || null;
+
+// hero card-ல் "excerpt"-க்கு பதிலா, நேர்காணல் பக்கத்தில் வாசகர் முதலில் படிக்கும்
+// முதல் கேள்வி-பதிலின் ஆரம்ப வரிகளையே (actual content preview) காட்டுதல்
+function previewText(text: string, maxLen = 220) {
+  if (!text) return '';
+  if (text.length <= maxLen) return text;
+  return text.slice(0, maxLen).trim() + '…';
+}
+const featuredPreview = featured?.data.qa?.[0]?.answer
+  ? previewText(featured.data.qa[0].answer)
+  : featured?.data.excerpt;
+---
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="relative min-h-[921px] flex flex-col md:flex-row items-center overflow-hidden pt-stack-lg">
+    <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-bl from-primary-fixed/20 to-tertiary-fixed/10 -z-10 rounded-bl-[200px]"></div>
+    <div class="absolute -top-20 -left-20 w-64 h-64 botanical-accent">
+      <span class="material-symbols-outlined text-[200px] text-tertiary">eco</span>
+    </div>
+    <div class="container mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+      <div class="md:col-span-6 reveal active">
+        <span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-4">நேர்காணல்</span>
+        {featured ? (
+          <>
+            <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-6">{featured.data.title}</h1>
+            <p id="heroTypewriter" data-full={featuredPreview} class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8 min-h-[110px]"></p>
+            <div class="flex items-center gap-stack-md">
+              <a href={`/interview/${featured.slug}`} class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-caps text-label-caps flex items-center gap-2 group no-underline">
+                தொடர்ந்து படிக்க
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+              <span class="font-label-caps text-label-caps text-outline">{featured.data.authorName}</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 class="font-display-lg text-display-lg text-primary leading-tight mb-6">உங்கள் முதல் நேர்காணல் இங்கு தெரியும்</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-8">Placeholder — /admin மூலம் ஒரு நேர்காணலைச் சேர்த்தவுடன் இது தானாக இங்கு தெரியும்.</p>
+          </>
+        )}
+      </div>
+      <div class="md:col-span-6 relative reveal flex justify-center active">
+        <div class="relative z-10 w-full max-w-md aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden shadow-2xl magazine-lift">
+          <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+               src={featured?.data.coverImage || 'https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=800&h=1000&fit=crop&q=80'}
+               alt={featured?.data.authorName || 'Placeholder portrait'} />
+        </div>
+        <div class="absolute -bottom-10 -right-10 w-48 h-48 border border-primary/20 rounded-full flex items-center justify-center p-8 -z-10 animate-[spin_20s_linear_infinite]">
+          <span class="font-label-caps text-label-caps text-primary text-center">KOOVEL LITERARY JOURNAL 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-center py-stack-lg reveal active">
+    <div class="h-[1px] w-1/4 bg-outline-variant"></div>
+    <span class="material-symbols-outlined text-secondary mx-8" style="font-variation-settings: 'FILL' 1;">spa</span>
+    <div class="h-[1px] w-1/4 bg-outline-variant"></div>
+  </div>
+
+  <QuoteWall />
+</BaseLayout>
+
+<script is:inline>
+  // Hero-ல் முதல் paragraph-ஐ typewriter ink-reveal ஆக (எழுதுவது போல்) காட்டுதல்
+  (function () {
+    const el = document.getElementById('heroTypewriter');
+    if (!el) return;
+    const fullText = el.getAttribute('data-full') || '';
+    let i = 0;
+    function type() {
+      if (i <= fullText.length) {
+        el.textContent = fullText.slice(0, i);
+        i++;
+        setTimeout(type, 22);
+      }
+    }
+    // சிறிது தாமதத்துடன் ஆரம்பித்தல் (hero-இன் மற்ற reveal animation முடிந்த பிறகு)
+    setTimeout(type, 400);
+  })();
+</script>
